@@ -1,3 +1,7 @@
+from ast import List
+from typing import Optional
+
+
 class Brano:
     def __init__(self, titolo: str, autore: str, durata: int) -> None:
         self.titolo = titolo
@@ -38,7 +42,7 @@ class Brano:
 class Playlist:
     def __init__(self, nome: str) -> None:
         self.nome = nome
-        self.brani = [] # inizializzare una lista vuota
+        self.brani = [] 
 
     def aggiungi_brano(self, brano: Brano) -> None:
         self.brani.append(brano)
@@ -48,3 +52,39 @@ class Playlist:
 
     def __str__(self) -> str:
         return f"Playlist: {self.nome} ({len(self.brani)} brani)"
+
+
+class CD:
+    def __init__(self, titolo: str, autore: str, brani: Optional[List[Brano]] = None) -> None:
+        self.titolo = titolo
+        self.autore = autore
+        self.brani = brani if brani is not None else []
+
+    def aggiungi_brano(self, brano: Brano) -> None: 
+        self.brani.append(brano)
+
+    def durata_totale(self) -> int:
+        totalDuration = 0
+        for brano in self.brani:
+            totalDuration += brano.durata
+        return totalDuration
+
+
+    def filtra_brani_per_autore(self, autore: str) -> List[Brano]:
+        newList = []
+        for brano in self.brani:
+            if autore == brano.autore:
+                newList.append(brano)
+        return newList
+
+
+    def copia_brani(self) -> List[str]:
+        newBrani = []
+        for brano in self.brani:
+            newBrani.append(brano)
+        return newBrani
+        
+    
+    def __str__(self) -> str: 
+        descrizione = [str(brano) for brano in self.brani]  
+        return f"CD: {self.titolo} di {self.autore}\n- " + "\n- ".join(descrizione)
