@@ -88,3 +88,22 @@ class CD:
     def __str__(self) -> str: 
         descrizione = [str(brano) for brano in self.brani]  
         return f"CD: {self.titolo} di {self.autore}\n- " + "\n- ".join(descrizione)
+
+
+if __name__ == "__main__":
+    brano1 = Brano("Opinel", "Simba la Rue", 137)
+    brano2 = Brano("Cagoule", "Simba la Rue", 170)
+    brano3 = Brano("Ca**i miei", "Simba la Rue", 135)
+
+    print(brano1)
+    print(f"E' un brano breve? {brano2.short_song()}")
+
+    cd = CD("SimbaGoated", "Simba la Rue", [brano1, brano2, brano3])
+    print(cd)
+    print(f"Durata totale: {cd.durata_totale()} secondi")
+
+    playlist = Playlist("Simba4Real")
+    playlist.aggiungi_brano(brano1)
+    playlist.aggiungi_brano(brano2)
+    print(playlist)
+    print(f"Durata playlist: {playlist.durata_totale()} secondi")
